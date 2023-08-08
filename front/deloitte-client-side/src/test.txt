@@ -1,0 +1,73 @@
+import React, { useState, useEffect, useRef } from "react";
+import style from "./Autocomplete.module.css";
+import SearchImage from "../../Image/icons-search.png";
+
+const Autocomplete = (props) => {
+  const [showSuggestion, setShowSuggestion] = useState(false);
+  const [autoText, setAutoText] = useState("");
+  const autocompleteRef = useRef();
+
+  useEffect(() => {
+    const handleClick = (event) => {
+      if (
+        autocompleteRef.current &&
+        !autocompleteRef.current.contains(event.target)
+      ) {
+        setShowSuggestion(false);
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  const changeHandler = (e) => {
+    var text = e.target.value;
+    setAutoText(text);
+    if (text.length > 1 || text.length === 0) {
+      props.changeSearchValue(text);
+      console.log(text);
+    }
+  };
+  const clickHandler = (suggestion) => {
+    props.changeSearchValue(suggestion);
+    setAutoText(suggestion);
+    console.log(suggestion);
+  };
+  return (
+    <div className={style.searchBar}>
+      <div ref={autocompleteRef}>
+        <div className={style.autocomplete}>
+          <input
+            placeholder="Search"
+            value={autoText}
+            onChange={changeHandler}
+            onFocus={() => setShowSuggestion(true)}
+          />
+        </div>
+        <div>
+          {showSuggestion && (
+            <ul className={style.suggestions}>
+              {props.suggestions &&
+                props.suggestions.map((suggestion) => (
+                  <li
+                    key={suggestion.id}
+                    onClick={(e) => clickHandler(suggestion.name)}
+                  >
+                    {suggestion.name}
+                  </li>
+                ))}
+              {!props.suggestions && <li>No Results Found</li>}
+            </ul>
+          )}
+        </div>
+      </div>
+
+      <button className={style.searchBtn}>
+        <img src={SearchImage} alt="search" />
+      </button>
+    </div>
+  );
+};
+export default Autocomplete;

@@ -1,0 +1,43 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("./Image/black-structure-spider_web.jpg");
+  display: flex;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.container {
+  max-width: 1300px;
+  margin-top: 180px;
+  display: inline-grid;
+  text-align: center;
+}
+
+.container h1 {
+  /* font-family: "Assistant", serif; */
+  color: rgb(42, 177, 177);
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.82;
+  letter-spacing: 0.36rem;
+  text-align: center;
+  /* font-weight: 700; */
+  font-size: 4.4rem;
+  margin: 20px 0 0 0;
+  width: 1300px;
+}
+.container span {
+  color: rgb(255, 255, 255);
+  font-family: "Assistant", Arial, sans-serif;
+  text-align: center;
+  font-size: 1.68rem;
+  letter-spacing: 0.02rem;
+  padding: 0 26px 0 0;
+  margin: 10px 0 10px 0;
+  height: 30px;
+}
